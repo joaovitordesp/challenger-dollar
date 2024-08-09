@@ -1,0 +1,15 @@
+FROM golang:1.20
+
+# Habilita CGO
+ENV CGO_ENABLED=1
+
+WORKDIR /app
+
+# Instala a dependência necessária para o CGO
+RUN apt-get update && apt-get install -y gcc
+
+COPY . .
+
+RUN go build -o server server.go
+
+CMD ["./server"]
